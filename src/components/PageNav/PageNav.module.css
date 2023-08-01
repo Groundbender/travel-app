@@ -32,3 +32,7 @@ a.ctaLink:visited {
   padding: 0.8rem 2rem;
   border-radius: 7px;
 }
+
+a.ctaLink:hover {
+  color: var(--color-light--2);
+}
