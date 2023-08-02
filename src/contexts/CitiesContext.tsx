@@ -7,6 +7,7 @@ type CitiesContextType = {
   currentCity: Cities | null;
   getCity: (id: string) => void;
   createCity: (newCity: Omit<Cities, "id">) => void;
+  deleteCity: (id: number) => void;
 };
 
 const CitiesContext = createContext<CitiesContextType>({
@@ -15,6 +16,7 @@ const CitiesContext = createContext<CitiesContextType>({
   currentCity: null,
   getCity: () => {},
   createCity: () => {},
+  deleteCity: () => {},
 });
 
 const BASE_URL = "http://localhost:5000";
@@ -77,9 +79,32 @@ const CitiesProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
+  const deleteCity = async (id: number) => {
+    try {
+      setIsLoading(true);
+      const res = await fetch(BASE_URL + "/cities/" + id, {
+        method: "POST",
+      });
+      const data = await res.json();
+
+      setCities((cities) => cities.filter((city) => city.id != id));
+    } catch (error) {
+      alert("Something went wrong!");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <CitiesContext.Provider
-      value={{ cities, isLoading, currentCity, getCity, createCity }}
+      value={{
+        cities,
+        isLoading,
+        currentCity,
+        getCity,
+        createCity,
+        deleteCity,
+      }}
     >
       {children}
     </CitiesContext.Provider>

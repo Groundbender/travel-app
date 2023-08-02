@@ -119,6 +119,18 @@
         "lng": 49.33273315429688
       },
       "id": 98443204
+    },
+    {
+      "cityName": "Kuzhener",
+      "country": "Russian Federation (the)",
+      "emoji": "🇷🇺",
+      "date": "2021-07-12T18:29:02.000Z",
+      "notes": "Coool",
+      "position": {
+        "lat": 56.84897198026975,
+        "lng": 48.955078125
+      },
+      "id": 98443205
     }
   ]
 }
