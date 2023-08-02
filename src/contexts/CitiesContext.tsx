@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { createContext, useEffect, useState, useContext } from "react";
 import { Cities } from "../types";
 
@@ -7,7 +6,7 @@ type CitiesContextType = {
   isLoading: boolean;
   currentCity: Cities | null;
   getCity: (id: string) => void;
-  createCity: (newCity: any) => void;
+  createCity: (newCity: Omit<Cities, "id">) => void;
 };
 
 const CitiesContext = createContext<CitiesContextType>({
@@ -58,7 +57,7 @@ const CitiesProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
-  const createCity = async (newCity: any) => {
+  const createCity = async (newCity: Omit<Cities, "id">) => {
     try {
       setIsLoading(true);
       const res = await fetch(BASE_URL + "/cities/", {

@@ -12,6 +12,7 @@ import Spinner from "../Spinner/Spinner";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useCities } from "../../contexts/CitiesContext";
+import { Cities } from "../../types";
 
 export function convertToEmoji(countryCode: string) {
   const codePoints: number[] = countryCode
@@ -73,15 +74,15 @@ function Form() {
 
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    if (!cityName || !date) return;
+    if (!cityName || !date || !lat || !lng) return;
 
-    const newCity = {
+    const newCity: Omit<Cities, "id"> = {
       cityName,
       country,
       emoji,
       date,
       notes,
-      position: { lat, lng },
+      position: { lat: +lat, lng: +lng },
     };
 
     createCity(newCity);
