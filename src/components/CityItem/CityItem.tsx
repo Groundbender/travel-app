@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 import styles from "./CityItem.module.css";
 import { Link } from "react-router-dom";

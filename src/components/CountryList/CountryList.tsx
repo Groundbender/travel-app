@@ -1,12 +1,11 @@
 import { useCities } from "../../contexts/CitiesContext";
-import { Cities } from "../../types";
-import CityItem from "../CityItem/CityItem";
+
 import CountryItem from "../CountryItem/CountryItem";
 import Message from "../Message/Message";
 import Spinner from "../Spinner/Spinner";
 import styles from "./CountryList.module.css";
 
-interface Countries {
+export interface Countries {
   country: string;
   emoji: string;
 }

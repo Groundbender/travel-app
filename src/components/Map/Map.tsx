@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useNavigate, useSearchParams } from "react-router-dom";
 import styles from "./Map.module.css";
 import {
@@ -15,9 +14,11 @@ import { useGeolocation } from "../../hooks/useGeolocation";
 import Button from "../Button/Button";
 import { useUrlPosition } from "../../hooks/useUrlPosition";
 
+type Geolocation = [number, number];
+
 const Map = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [mapPosition, setMapPosition] = useState<any>([40, 0]);
+  const [mapPosition, setMapPosition] = useState<Geolocation>([40, 0]);
 
   const { cities } = useCities();
   const {
@@ -37,7 +38,7 @@ const Map = () => {
 
   useEffect(() => {
     if (mapLat && mapLng) {
-      setMapPosition([mapLat, mapLng]);
+      setMapPosition([+mapLat, +mapLng]);
     }
   }, [mapLat, mapLng]);
 
@@ -83,7 +84,7 @@ const Map = () => {
   );
 };
 
-const ChangeCenter = ({ position }: any) => {
+const ChangeCenter = ({ position }: { position: Geolocation }) => {
   const map = useMap();
 
   map.setView(position);
@@ -95,7 +96,9 @@ const DetectClick = () => {
   const navigate = useNavigate();
 
   useMapEvents({
-    click: (e) => navigate(`form?lat=${e.latlng.lat}&lng=${e.latlng.lng}`),
+    click: (e) => {
+      navigate(`form?lat=${e.latlng.lat}&lng=${e.latlng.lng}`);
+    },
   });
 
   return null;

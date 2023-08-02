@@ -1,11 +1,10 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { useState } from "react";
+import { Pos } from "../types";
 
 export function useGeolocation(defaultPosition = null) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-  const [position, setPosition] = useState<any>(null);
+  const [position, setPosition] = useState<Pos | null>(null);
 
   function getPosition() {
     if (!navigator.geolocation) {

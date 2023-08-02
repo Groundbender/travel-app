@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { createContext, useEffect, useState, useContext } from "react";
 import { Cities } from "../types";
 
@@ -6,6 +7,7 @@ type CitiesContextType = {
   isLoading: boolean;
   currentCity: Cities | null;
   getCity: (id: string) => void;
+  createCity: (newCity: any) => void;
 };
 
 const CitiesContext = createContext<CitiesContextType>({
@@ -13,6 +15,7 @@ const CitiesContext = createContext<CitiesContextType>({
   isLoading: false,
   currentCity: null,
   getCity: () => {},
+  createCity: () => {},
 });
 
 const BASE_URL = "http://localhost:5000";
@@ -55,8 +58,30 @@ const CitiesProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
+  const createCity = async (newCity: any) => {
+    try {
+      setIsLoading(true);
+      const res = await fetch(BASE_URL + "/cities/", {
+        method: "POST",
+        body: JSON.stringify(newCity),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await res.json();
+
+      setCities((cities) => [...cities, data]);
+    } catch (error) {
+      alert("Something went wrong!");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
-    <CitiesContext.Provider value={{ cities, isLoading, currentCity, getCity }}>
+    <CitiesContext.Provider
+      value={{ cities, isLoading, currentCity, getCity, createCity }}
+    >
       {children}
     </CitiesContext.Provider>
   );

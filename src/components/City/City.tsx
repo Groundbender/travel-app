@@ -1,12 +1,11 @@
-import { useParams, useSearchParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import styles from "./City.module.css";
 import { useEffect } from "react";
 import { useCities } from "../../contexts/CitiesContext";
 import Spinner from "../Spinner/Spinner";
 import BackButton from "../BackButton/BackButton";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const formatDate = (date: any) =>
+const formatDate = (date: Date) =>
   new Intl.DateTimeFormat("en", {
     day: "numeric",
     month: "long",
