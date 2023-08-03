@@ -10,5 +10,5 @@ export type Cities = {
   date: Date;
   notes: string;
   position: Postion;
-  id: number;
+  id: string;
 };

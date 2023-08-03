@@ -1,4 +1,4 @@
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styles from "./Map.module.css";
 import {
   MapContainer,
@@ -17,7 +17,6 @@ import { useUrlPosition } from "../../hooks/useUrlPosition";
 type Geolocation = [number, number];
 
 const Map = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
   const [mapPosition, setMapPosition] = useState<Geolocation>([40, 0]);
 
   const { cities } = useCities();
@@ -66,7 +65,7 @@ const Map = () => {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
         />
-        {cities.map((city) => (
+        {cities?.map((city) => (
           <Marker
             position={[city.position.lat, city.position.lng]}
             key={city.id}
