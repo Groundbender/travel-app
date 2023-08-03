@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./Footer.module.css";
 const Footer = () => {
   const date = new Date().getFullYear();
@@ -6,7 +5,7 @@ const Footer = () => {
   return (
     <footer className={styles.footer}>
       <p className={styles.copyright}>
-        &copy; Copyright {date} by WorldWise Inc.
+        &copy; Copyright {date} by Overworld Inc.
       </p>
     </footer>
   );
